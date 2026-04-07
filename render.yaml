@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: door-tag-generator
+    runtime: python
+    buildCommand: pip install -r requirements.txt && apt-get install -y poppler-utils
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --timeout 120 --workers 2
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false          # you enter this in the Render dashboard
+    plan: free
